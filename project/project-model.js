@@ -10,7 +10,8 @@ module.exports = {
 
 // It works :)
 function find() {
-    return db("projects") 
+    return db("projects")
+
 }
 
 // It works :)
@@ -29,10 +30,10 @@ function findById(id) {
     .first()
 }
 
+
+
+
 // ********** Adding Task **********
-
-
-
 
 
 // function findTask(id) {

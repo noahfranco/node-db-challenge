@@ -10,8 +10,14 @@ const router = express.Router();
 // It's working :)
 router.get("/", (req, res) => { // localhost:5000/api/project
     Projects.find()
-    .then(project => {
-        res.status(200).json(project)
+    .then(projects => {
+        const changeCompleted = projects.map(project => {
+            return {
+              ...project,
+              completed: !!Number(project.completed)
+            }
+          })
+        res.status(200).json(changeCompleted)
     })
     .catch(error => {
         console.log(error)
@@ -38,8 +44,8 @@ router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
     const { id } = req.params 
 
     Projects.findById(id)
-    .then(project => {
-        res.status(200).json(project)
+    .then(projects => {
+        res.status(200).json(projects)
     })
     .catch(error => {
         console.log(error)

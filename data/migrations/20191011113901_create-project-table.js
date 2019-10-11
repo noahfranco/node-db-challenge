@@ -7,7 +7,8 @@ exports.up = function(knex) {
         tbl
         .boolean("completed")
         .notNullable()
-        .defaultTo(false)
+        .defaultTo(true)
+    
     })
     .createTable("task", tbl => {
         tbl.increments()
@@ -16,7 +17,7 @@ exports.up = function(knex) {
         tbl
         .boolean("completed")
         .notNullable()
-        .defaultTo(false)
+        .defaultTo(true)
 
         tbl
         .integer("project_id")
