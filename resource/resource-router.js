@@ -17,6 +17,7 @@ router.get("/", (req, res) => { // localhost:5000/api/resource
     })
 })
 
+// It's working :)
 router.post("/", (req, res) => { // localhost:5000/api/resource
     const resourceBody = req.body
     
@@ -30,6 +31,7 @@ router.post("/", (req, res) => { // localhost:5000/api/resource
     })
 })
 
+// It's working :)
 router.get("/:id", (req, res) => { // localhost:5000/api/resource/:id
     const { id } = req.params 
 
