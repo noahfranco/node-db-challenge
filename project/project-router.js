@@ -1,10 +1,10 @@
 const express = require("express"); 
 
-// Logic behind end points 
 const Projects = require("./project-model.js"); 
 
 const router = express.Router(); 
 
+// It's working :)
 router.get("/", (req, res) => { // localhost:5000/api/project
     Projects.find()
     .then(project => {
@@ -16,6 +16,7 @@ router.get("/", (req, res) => { // localhost:5000/api/project
     })
 })
 
+// It's working :)
 router.post("/", (req, res) => { // localhost:5000/api/project
     const projectBody = req.body
     
@@ -29,6 +30,7 @@ router.post("/", (req, res) => { // localhost:5000/api/project
     })
 })
 
+// It's working :)
 router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
     const { id } = req.params 
 
@@ -38,11 +40,11 @@ router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
     })
     .catch(error => {
         console.log(error)
-        res.status(500).json({error: "Failed to get by id Projects"})
+        res.status(500).json({error: "Failed to get by id on Projects"})
     })
 })
 
-// Adding Task
+// ********** Adding Task **********
 
 router.get("/task", (req, res) => { // localhost:5000/api/project/:id/task
     Projects.findTask()
@@ -55,11 +57,11 @@ router.get("/task", (req, res) => { // localhost:5000/api/project/:id/task
     })
 })
 
-router.post("/:id/task", (req, res) => { // localhost:5000/api/project/task
-    const { id } = req.params
+router.post("/task", (req, res) => { // localhost:5000/api/project/task
+    // const { id } = req.params
     const taskBody = req.body
     
-    Projects.findById(id, taskBody)
+    Projects.addTask(taskBody)
     .then(tasks => {
         res.status(200).json(tasks)
     })

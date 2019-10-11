@@ -29,7 +29,7 @@ function findById(id) {
     .first()
 }
 
-// Below are the Task 
+// ********** Adding Task **********
 
 function findTask() {
     return db("task")
@@ -45,10 +45,11 @@ function findTask() {
     })
 }
 
-function addTask(task, id) {
+function addTask(id, task) {
     return db("task")
     .where({ project_id: id })
     .insert(task)
 }
+
 
 

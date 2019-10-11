@@ -36,7 +36,7 @@ exports.up = function(knex) {
         .onUpdate("CASCADE")
         .onDelete("RESTRICT")
 
-        tbl.unique(["project_id", "resource_id"]);
+        // tbl.unique(["project_id", "resource_id"]);
     })
     .createTable("resources", tbl => {
         tbl.increments()

@@ -5,26 +5,42 @@ const Resource = require("../resource/resource.model.js");
 
 const router = express.Router(); 
 
+// It's working :)
 router.get("/", (req, res) => { // localhost:5000/api/resource
-
+    Resource.find()
+    .then(resources => {
+        res.status(200).json(resources)
+    })
+    .catch(error => {
+        console.log(error)
+        res.status(500).json({error: "Failed to get Resources"})
+    })
 })
 
 router.post("/", (req, res) => { // localhost:5000/api/resource
-
+    const resourceBody = req.body
+    
+    Resource.add(resourceBody) 
+    .then(resources => {
+        res.status(200).json(resources)
+    })
+    .catch(error => { 
+        console.log(error)
+        res.status(500).json({error: "Failed to post Resources"})
+    })
 })
 
 router.get("/:id", (req, res) => { // localhost:5000/api/resource/:id
+    const { id } = req.params 
 
-})
-
-// Do these last ****************
-
-router.put("/:id", (req, res) => { // localhost:5000/api/resource/:id
-
-})
-
-router.delete("/:id", (req, res) => { // localhost:5000/api/resource/:id
-
+    Resource.findById(id)
+    .then(resources => {
+        res.status(200).json(resources)
+    })
+    .catch(error => {
+        console.log(error)
+        res.status(500).json({error: "Failed to get by id on Resources"})
+    })
 })
 
 module.exports = router; 
