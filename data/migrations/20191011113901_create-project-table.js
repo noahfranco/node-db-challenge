@@ -11,8 +11,8 @@ exports.up = function(knex) {
     })
     .createTable("task", tbl => {
         tbl.increments()
-        tbl.string("description", 255).notNullable()
         tbl.string("notes", 255)
+        tbl.string("description", 255).notNullable()
         tbl
         .boolean("completed")
         .notNullable()
@@ -22,7 +22,7 @@ exports.up = function(knex) {
         .integer("project_id")
         .unsigned()
         .notNullable()
-        .references()
+        .references("id")
         .inTable("projects")
         .onUpdate("CASCADE")
         .onDelete("RESTRICT")
