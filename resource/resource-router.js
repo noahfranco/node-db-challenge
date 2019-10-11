@@ -17,6 +17,8 @@ router.get("/:id", (req, res) => { // localhost:5000/api/resource/:id
 
 })
 
+// Do these last ****************
+
 router.put("/:id", (req, res) => { // localhost:5000/api/resource/:id
 
 })

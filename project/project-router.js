@@ -17,12 +17,16 @@ router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
 
 })
 
-router.put("/:id", (req, res) => { // localhost:5000/api/project/:id
+// Adding Task
+
+router.get("/task", (req, res) => { // localhost:5000/api/project
 
 })
 
-router.delete("/:id", (req, res) => { // localhost:5000/api/project/:id
+router.post("/task", (req, res) => { // localhost:5000/api/project
 
 })
+
+
 
 module.exports = router; 
