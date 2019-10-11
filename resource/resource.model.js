@@ -5,10 +5,12 @@ module.exports = {
     findById
 }
 
+// It's working :)
 function find() {
     return db("resources") 
 }
 
+// It's working :)
 function add(resource) {
     return db("resources")
     .insert(resource)
@@ -17,6 +19,7 @@ function add(resource) {
     })
 }
 
+// It's working :)
 function findById(id) {
     return db("resources")
     .where({ id })

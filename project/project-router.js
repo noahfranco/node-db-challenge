@@ -2,6 +2,9 @@ const express = require("express");
 
 const Projects = require("./project-model.js"); 
 
+// For project task
+const db = require("../data/db-config.js"); 
+
 const router = express.Router(); 
 
 // It's working :)
@@ -46,10 +49,28 @@ router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
 
 // ********** Adding Task **********
 
-router.get("/task", (req, res) => { // localhost:5000/api/project/:id/task
-    Projects.findTask()
-    .then(task => {
-        res.status(200).json(task)
+// router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
+//     Projects.findTask()
+//     .then(task => {
+//         res.status(200).json(task)
+//     })
+//     .catch(error => {
+//         console.log(error)
+//         res.status(500).json({error: "Failed to get Task"})
+//     })
+// })
+
+router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
+    const { id } = req.params
+
+    db("projects")
+    .where({ id })
+    .then(project => {
+       db("task")
+        .where({ project_id: id })
+        .then(tasks => {
+            res.status(200).json({...project[0], tasks }) 
+        })
     })
     .catch(error => {
         console.log(error)
@@ -57,17 +78,40 @@ router.get("/task", (req, res) => { // localhost:5000/api/project/:id/task
     })
 })
 
-router.post("/task", (req, res) => { // localhost:5000/api/project/task
-    // const { id } = req.params
-    const taskBody = req.body
+
+
+
+// router.post("/:id/task", (req, res) => { // localhost:5000/api/id/project/task
+//     const { id } = req.params
+//     const taskBody = req.body
     
-    Projects.addTask(taskBody)
+//     Projects.addTask( id, taskBody)
+//     .then(tasks => {
+//         res.status(200).json(tasks)
+//     })
+//     .catch(error => { 
+//         console.log(error)
+//         res.status(500).json({error: "Failed to post new Task from Projects"})
+//     })
+// })
+
+router.post("/task", (req, res) => { // localhost:5000/api/:id/project/task
+    const taskBody = req.body
+
+    db("task")
+    .insert(taskBody)
     .then(tasks => {
-        res.status(200).json(tasks)
-    })
-    .catch(error => { 
-        console.log(error)
-        res.status(500).json({error: "Failed to post new Task from Projects"})
+        const id = tasks[0]
+        db("task")
+        .where({ id })
+        .first()
+        .then(tasks => {
+            res.status(200).json(tasks)
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({error: "Failed to get Task"})
+        })
     })
 })
 

@@ -11,8 +11,8 @@ exports.up = function(knex) {
     })
     .createTable("task", tbl => {
         tbl.increments()
-        tbl.string("notes", 255)
         tbl.string("description", 255).notNullable()
+        tbl.string("notes", 255).notNullable()
         tbl
         .boolean("completed")
         .notNullable()
@@ -36,7 +36,6 @@ exports.up = function(knex) {
         .onUpdate("CASCADE")
         .onDelete("RESTRICT")
 
-        // tbl.unique(["project_id", "resource_id"]);
     })
     .createTable("resources", tbl => {
         tbl.increments()

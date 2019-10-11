@@ -4,8 +4,8 @@ module.exports = {
    find, 
    findById, 
    add, 
-   addTask,
-   findTask 
+//    addTask,
+//    findTask 
 }
 
 // It works :)
@@ -31,25 +31,28 @@ function findById(id) {
 
 // ********** Adding Task **********
 
-function findTask() {
-    return db("task")
-    .then(tasks => {
-        tasks.map(task => {
-            if(task.completed) {
-                task.completed = true 
-            } else {
-                task.completed = false 
-            }
-        })
-        return tasks
-    })
-}
 
-function addTask(id, task) {
-    return db("task")
-    .where({ project_id: id })
-    .insert(task)
-}
+
+
+
+// function findTask(id) {
+//     return db("task")
+//     .innerJoin(
+//         "projects",
+//         "project_id",
+//         "task.project_id"
+//     )
+//     .select("task.id", "projects.name", "projects.description", "task.notes", "task.description")
+//     .where("project_id", id)
+// }
+
+
+
+// function addTask(id, task) {
+//     return db("task")
+//     .where({ project_id: id })
+//     .insert(task)
+// }
 
 
 
