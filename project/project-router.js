@@ -58,17 +58,6 @@ router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
 
 // ********** Adding Task **********
 
-// router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
-//     Projects.findTask()
-//     .then(task => {
-//         res.status(200).json(task)
-//     })
-//     .catch(error => {
-//         console.log(error)
-//         res.status(500).json({error: "Failed to get Task"})
-//     })
-// })
-
 // It's working :)
 router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
     const { id } = req.params
@@ -105,7 +94,7 @@ router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
 //     })
 // })
 
-// It's working :)
+
 router.post("/task", (req, res) => { // localhost:5000/api/:id/project/task
     const taskBody = req.body
 

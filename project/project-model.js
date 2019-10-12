@@ -35,20 +35,6 @@ function findById(id) {
 
 // ********** Adding Task **********
 
-
-// function findTask(id) {
-//     return db("task")
-//     .innerJoin(
-//         "projects",
-//         "project_id",
-//         "task.project_id"
-//     )
-//     .select("task.id", "projects.name", "projects.description", "task.notes", "task.description")
-//     .where("project_id", id)
-// }
-
-
-
 // function addTask(id, task) {
 //     return db("task")
 //     .where({ project_id: id })
