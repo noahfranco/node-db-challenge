@@ -42,15 +42,18 @@ router.post("/", (req, res) => { // localhost:5000/api/project
 // It's working :)
 router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
     const { id } = req.params 
-
-    Projects.findById(id)
-    .then(projects => {
-        res.status(200).json(projects)
-    })
-    .catch(error => {
+    if(!id) {
+        res.status(404).json({error: "Sorry User was not found"})   
+    } else {
+        Projects.findById(id)
+        .then(projects => {
+            res.status(200).json(projects)
+        })
+        .catch(error => {
         console.log(error)
         res.status(500).json({error: "Failed to get by id on Projects"})
-    })
+        })
+    }
 })
 
 // ********** Adding Task **********
@@ -66,6 +69,7 @@ router.get("/:id", (req, res) => { // localhost:5000/api/project/:id
 //     })
 // })
 
+// It's working :)
 router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
     const { id } = req.params
 
@@ -101,6 +105,7 @@ router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
 //     })
 // })
 
+// It's working :)
 router.post("/task", (req, res) => { // localhost:5000/api/:id/project/task
     const taskBody = req.body
 
