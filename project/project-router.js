@@ -65,10 +65,22 @@ router.get("/:id/task", (req, res) => { // localhost:5000/api/:id/project/task
     db("projects")
     .where({ id })
     .then(project => {
+        const projectCompleted = project.map(task => {
+            return {
+              ...task,
+              completed: !!Number(task.completed)
+            }
+          })
        db("task")
         .where({ project_id: id })
         .then(tasks => {
-            res.status(200).json({...project[0], tasks }) 
+            const changeCompleted = tasks.map(task => {
+                return {
+                  ...task,
+                  completed: !!Number(task.completed)
+                }
+              })
+            res.status(200).json({...projectCompleted[0], changeCompleted }) 
         })
     })
     .catch(error => {
